@@ -41,4 +41,4 @@ UPDATE products SET name = :name, image_url = :image_url, price = :price, is_act
 -- :name get-product :? :1
 -- :doc retrieve a product given the slug.
 SELECT * FROM products
-WHERE slug = :slug
+WHERE id = :id

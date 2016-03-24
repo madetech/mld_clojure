@@ -27,10 +27,10 @@
     "product/show.html"
     (merge {:product (db/get-product {:slug slug})})))
 
-(defn product-edit-page [slug]
+(defn product-edit-page [id]
   (layout/render
     "product/edit.html"
-    (merge {:product (db/get-product {:slug slug})})))
+    (merge {:product (db/get-product {:id id})})))
 
 
 (defn validate-product [params]
@@ -65,7 +65,7 @@
   (GET "/product/inactive" [] (product-list-inactive-page))
   (GET "/product/create" [] (product-create-page))
   (POST "/product/create" request (create-product! request))
-  (GET "/product/edit/:slug" [slug] (product-edit-page slug))
+  (GET "/product/edit/:id" [id] (product-edit-page id))
   (POST "/product/update" request (update-product! request))
   (POST "/" request (create-product! request))
   (GET "/product/:slug" [slug] (product-show-page slug)))
