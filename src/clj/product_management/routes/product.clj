@@ -43,8 +43,8 @@
       (response/found "/"))))
 
 (defroutes product-routes
-  (GET "/create" [] (product-create-page))
   (GET "/" [] (product-list-page))
+  (GET "/product/create" [] (product-create-page))
+  (POST "/product/create" request (create-product! request))
   (GET "/product/edit/:slug" [slug] (product-edit-page slug))
-  (POST "/" request (create-product! request))
   (GET "/product/:slug" [slug] (product-show-page slug)))
