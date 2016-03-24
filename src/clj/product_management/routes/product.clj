@@ -33,13 +33,16 @@
       params
       :name [v/required [v/min-count 2]])))
 
+(defn create-slug-from-name [name]
+  (clojure.string/lower-case (clojure.string/replace name #"\s+" "-")))
+  
 (defn create-product! [{:keys [params]}]
   (if-let [errors (validate-product params)]
     (-> (response/found "/")
         (assoc :flash (assoc params :errors errors)))
     (do
       (db/create-product!
-        (assoc params :is_active true))
+        (assoc params :is_active true :slug (create-slug-from-name (params :name))))
       (response/found "/"))))
 
 (defroutes product-routes
