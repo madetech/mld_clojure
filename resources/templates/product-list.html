@@ -4,7 +4,7 @@
 
   <ul>
     {% for product in products %}
-      <li><a href="{{servlet-context}}/{{product.slug}}">{{product.name}}</a></li>
+      <li><a href="{{servlet-context}}/product/{{product.slug}}">{{product.name}}</a></li>
     {% endfor %}
   </ul>
 {% endblock %}

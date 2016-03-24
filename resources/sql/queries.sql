@@ -29,3 +29,8 @@ SELECT * FROM products
 INSERT INTO products
 (name, slug, image_url, price, is_active)
 VALUES (:name, :slug, :image_url, :price, :is_active)
+
+-- :name get-product :? :1
+-- :doc retrieve a product given the slug.
+SELECT * FROM products
+WHERE slug = :slug
