@@ -14,6 +14,20 @@
                            value="{{name}}" />
                 </p>
                 <p>
+                    Slug:
+                    <input class="form-control"
+                           type="text"
+                           name="slug"
+                           value="{{slug}}" />
+                </p>
+                <p>
+                    image:
+                    <input class="form-control"
+                           type="text"
+                           name="image_url"
+                           value="{{image_url}}" />
+                </p>
+                <p>
                 <p>
                     Product Image:
                     <input class="form-control"
@@ -28,20 +42,13 @@
                            name="price"
                            value="{{price}}" />
                 </p>
-                <p>
-                    Is Active?:
-                    <input class="form-control"
-                           type="checkbox"
-                           name="is_active"
-                           value="{{is_active}}" />
-                </p>
                 </p>
                 {% if errors.message %}
                 <div class="alert alert-danger">{{errors.message|join}}</div>
                 {% endif %}
                 <button type="submit" class="btn btn-primary" value="product-create">
                   Create Product
-                </button> 
+                </button>
         </form>
     </div>
 </div>

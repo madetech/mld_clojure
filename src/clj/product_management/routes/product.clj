@@ -4,7 +4,7 @@
             [ring.util.http-response :as response]
             [clojure.java.io :as io]
             [product-management.db.core :as db]
-            [bouncer.core :as b]
+            [bouncer.core :as b :only [defvalidator]]
             [bouncer.validators :as v]
             [ring.util.response :refer [redirect]]))
 
@@ -34,7 +34,7 @@
         (assoc :flash (assoc params :errors errors)))
     (do
       (db/create-product!
-        (assoc params :timestamp (java.util.Date.)))
+        (assoc params :is_active true))
       (response/found "/"))))
 
 (defroutes product-routes
