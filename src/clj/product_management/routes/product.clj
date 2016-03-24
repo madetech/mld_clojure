@@ -1,6 +1,6 @@
 (ns product-management.routes.product
   (:require [product-management.layout :as layout]
-            [compojure.core :refer [defroutes GET]]
+            [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :as response]
             [clojure.java.io :as io]
             [product-management.db.core :as db]
@@ -17,10 +17,6 @@
   (layout/render
     "product-create.html"))
 
-(defroutes product-routes
-  (GET "/" [] (product-list-page))
-  (GET "/create" [] (product-create-page)))
-
 (defn validate-product [params]
   (first
     (b/validate
@@ -35,3 +31,8 @@
       (db/create-product!
         (assoc params :timestamp (java.util.Date.)))
       (response/found "/"))))
+
+(defroutes product-routes
+  (POST "/" request (create-product! request))
+  (GET "/create" [] (product-create-page))
+  (GET "/" [] (product-list-page)))
