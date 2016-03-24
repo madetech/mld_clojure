@@ -26,13 +26,19 @@
                   <li class="nav-item">
                       <a href="{{servlet-context}}/"
                          class="nav-link{% ifequal page "product/list.html" %} active{%endifequal%}">
-                      home
+                      Home
                       </a>
                   </li>
                   <li class="nav-item">
                       <a href="{{servlet-context}}/product/create"
                          class="nav-link{% ifequal page "product/create.html" %} active{%endifequal%}">
-                      new product
+                      Create Product
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{servlet-context}}/product/inactive"
+                         class="nav-link{% ifequal page "product/inactive.html" %} active{%endifequal%}">
+                      Review Deleted Products
                       </a>
                   </li>
               </ul>

@@ -24,6 +24,10 @@ WHERE id = :id
 -- :doc retrieves the active product records
 SELECT * FROM products WHERE is_active = TRUE
 
+-- :name get-inactive-products :? :*
+-- :doc retrieves the inactive product records
+SELECT * FROM products WHERE is_active = FALSE
+
 -- :name create-product! :! :n
 -- :doc creates a new product record
 INSERT INTO products

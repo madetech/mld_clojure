@@ -10,6 +10,7 @@
     </tr>
     {% for product in products %}
     <tr>
+      <!-- TODO: Replace product name with thumbnail-->
       <td><a href="{{servlet-context}}/product/{{product.slug}}">{{product.name}}</a></td>
       <td>£ {{product.price}}</td>
       <td><a href="{{servlet-context}}/product/edit/{{product.id}}">edit</a></td>

@@ -13,6 +13,11 @@
     "product/list.html"
     (merge {:products (db/get-products)})))
 
+(defn product-list-inactive-page []
+  (layout/render
+    "product/inactive.html"
+    (merge {:products (db/get-inactive-products)})))
+
 (defn product-create-page []
   (layout/render
     "product/create.html"))
@@ -26,6 +31,7 @@
   (layout/render
     "product/edit.html"
     (merge {:product (db/get-product {:slug slug})})))
+
 
 (defn validate-product [params]
   (first
@@ -56,6 +62,7 @@
 
 (defroutes product-routes
   (GET "/" [] (product-list-page))
+  (GET "/product/inactive" [] (product-list-inactive-page))
   (GET "/product/create" [] (product-create-page))
   (POST "/product/create" request (create-product! request))
   (GET "/product/edit/:slug" [slug] (product-edit-page slug))
