@@ -3,6 +3,8 @@
   <h1>Check out these products</h1>
 
   <ul>
-    <li><a href="#">Product 1</a></li>
+    {% for product in products %}
+      <li><a href="#">{{product.name}}</a></li>
+    {% endfor %}
   </ul>
 {% endblock %}

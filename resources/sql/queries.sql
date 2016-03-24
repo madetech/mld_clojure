@@ -19,3 +19,7 @@ WHERE id = :id
 -- :doc delete a user given the id
 DELETE FROM users
 WHERE id = :id
+
+-- :name get-products :? :*
+-- :doc retrieves the product records
+SELECT * FROM products
