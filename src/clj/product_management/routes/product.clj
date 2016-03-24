@@ -22,6 +22,11 @@
     "product/show.html"
     (merge {:product (db/get-product {:slug slug})})))
 
+(defn product-edit-page [slug]
+  (layout/render
+    "product/edit.html"
+    (merge {:product (db/get-product {:slug slug})})))
+
 (defn validate-product [params]
   (first
     (b/validate
@@ -40,5 +45,6 @@
 (defroutes product-routes
   (GET "/create" [] (product-create-page))
   (GET "/" [] (product-list-page))
+  (GET "/product/edit/:slug" [slug] (product-edit-page slug))
   (POST "/" request (create-product! request))
   (GET "/product/:slug" [slug] (product-show-page slug)))
