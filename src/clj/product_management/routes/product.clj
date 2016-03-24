@@ -1,4 +1,4 @@
-(ns product-management.routes.home
+(ns product-management.routes.product
   (:require [product-management.layout :as layout]
             [compojure.core :refer [defroutes GET]]
             [ring.util.http-response :as response]
@@ -13,7 +13,7 @@
     "product-list.html"
     (merge {:products (db/get-products)})))
 
-(defroutes home-routes
+(defroutes product-routes
   (GET "/" [] (product-list-page)))
 
 (defn validate-message [params]
