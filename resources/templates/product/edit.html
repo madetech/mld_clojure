@@ -27,6 +27,13 @@
                        name="price"
                        value="{{product.price}}" />
             </p>
+            <p>
+                Is Active?:
+                <input class="form-control"
+                       type="checkbox"
+                       name="is_active"
+                       {% if product.is_active %}checked{% endif %} />
+            </p>     
             {% if errors.message %}
             <div class="alert alert-danger">{{errors.message|join}}</div>
             {% endif %}
