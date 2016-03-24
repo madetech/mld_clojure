@@ -5,4 +5,10 @@
   <p>
     Buy me for: {{product.price}}
   </p>
+
+  {% if product.image_url %}
+  <p>
+    <img src="{{product.image_url}}">
+  </p>
+  {% endif %}
 {% endblock %}

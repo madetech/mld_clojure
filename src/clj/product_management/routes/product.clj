@@ -30,8 +30,7 @@
 (defn product-edit-page [id]
   (layout/render
     "product/edit.html"
-    (merge {:product (db/get-product {:id id})})))
-
+    (merge {:product (db/get-product-by-id {:id id})})))
 
 (defn validate-product [params]
   (first
