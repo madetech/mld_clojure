@@ -15,22 +15,22 @@
     (migrations/migrate ["migrate"] (env :database-url))
     (f)))
 
-(deftest test-users
+(deftest test-products
   (jdbc/with-db-transaction [t-conn *db*]
     (jdbc/db-set-rollback-only! t-conn)
-    (is (= 1 (db/create-user!
+    (is (= 1 (db/create-product!
                t-conn
-               {:id         "1"
-                :first_name "Sam"
-                :last_name  "Smith"
-                :email      "sam.smith@example.com"
-                :pass       "pass"})))
-    (is (= {:id         "1"
-            :first_name "Sam"
-            :last_name  "Smith"
-            :email      "sam.smith@example.com"
-            :pass       "pass"
-            :admin      nil
-            :last_login nil
-            :is_active  nil}
-           (db/get-user t-conn {:id "1"})))))
+               {:id        "1"
+                :name      "Test Product"
+                :slug      "test-product"
+                :price     99.00M
+                :image_url "test"
+                :is_active true
+                })))
+    (is (= {:id        1
+            :name      "Test Product"
+            :slug      "test-product"
+            :price      99.00M
+            :image_url "test"
+            :is_active true }
+           (db/get-product t-conn {:slug "test-product"})))))

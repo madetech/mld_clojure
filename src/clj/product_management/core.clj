@@ -77,13 +77,3 @@
     (migrations/migrate ["migrate"](:database-url env))
     (f)))
 
-(deftest test-product
-  (jdbc/with-db-transaction [t-conn *db*]
-    (jdbc/db-set-rollback-only! t-conn)
-    (let [product {:name "Test Product"
-                   :slug "test-product"
-                   :is_active 1}]
-      (is (= 1 (db/create-product! t-conn product)))
-      (let [result (db/get-products t-conn {})]
-        (is (= 1 (count result)))
-        (is (= product (dissoc (first result) :id)))))))
