@@ -36,6 +36,10 @@
     "product/edit.html"
     (merge {:product (db/get-product-by-id {:id id})})))
 
+(defn product-delete [id]
+  (db/delete-product!
+  (response/found "/"))
+
 ;
 ; UTILITY
 ;
@@ -78,6 +82,7 @@
   (GET "/product/create" [] (product-create-page))
   (POST "/product/create" request (create-product! request))
   (GET "/product/edit/:id" [id] (product-edit-page id))
+  (GET "/product/delete/:id" [id] (product-delete id))
   (POST "/product/update" request (update-product! request))
   (POST "/" request (create-product! request))
   (GET "/product/:slug" [slug] (product-show-page slug)))
