@@ -6,3 +6,6 @@ Within vagrant
 Create db manually.
   In mysql console:
  create database product_management_dev;
+
+Boot a REPL
+~/bin/lein repl
