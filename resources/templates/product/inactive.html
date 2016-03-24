@@ -3,12 +3,14 @@
   <ul>
   <table>  
     <tr>
+      <th></th>
       <th>Product</th>
       <th>Price</th>
     </tr>
     {% for product in products %}
     <tr>
       <!-- TODO: Replace product name with thumbnail-->
+      <td><img src="{{product.image_url}}" alt="{{product.slug}}" height="70" width="70">
       <td><a href="{{servlet-context}}/product/{{product.slug}}">{{product.name}}</a></td>
       <td>£ {{product.price}}</td>
       <td><a href="{{servlet-context}}/product/edit/{{product.id}}">edit</a></td>

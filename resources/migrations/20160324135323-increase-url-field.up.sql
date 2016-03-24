@@ -1,0 +1,1 @@
+alter table products modify column image_url varchar(255);
