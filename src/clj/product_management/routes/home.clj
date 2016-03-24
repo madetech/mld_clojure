@@ -16,9 +16,8 @@
 (defroutes home-routes
   (GET "/" [] (product-list-page)))
 
-(defn validate-message [params]
+ (defn validate-message [params]
   (first
     (b/validate
       params
-      :name v/required
-      :message [v/required [v/min-count 10]])))
+      :name [v/required [v/min-count 2]])))
