@@ -23,3 +23,9 @@ WHERE id = :id
 -- :name get-products :? :*
 -- :doc retrieves the product records
 SELECT * FROM products
+
+-- :name create-product! :! :n
+-- :doc creates a new product record
+INSERT INTO products
+(name, slug, image_url, price, is_active)
+VALUES (:name, :slug, :image_url, :price, :is_active)

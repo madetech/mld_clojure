@@ -16,8 +16,17 @@
 (defroutes product-routes
   (GET "/" [] (product-list-page)))
 
-(defn validate-message [params]
+(defn validate-product [params]
   (first
     (b/validate
       params
       :name [v/required [v/min-count 2]])))
+
+(defn create-product! [{:keys [params]}]
+  (if-let [errors (validate-product params)]
+    (-> (response/found "/")
+        (assoc :flash (assoc params :errors errors)))
+    (do
+      (db/create-product!
+        (assoc params :timestamp (java.util.Date.)))
+      (response/found "/"))))
