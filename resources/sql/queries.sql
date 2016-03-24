@@ -30,6 +30,10 @@ INSERT INTO products
 (name, slug, image_url, price, is_active)
 VALUES (:name, :slug, :image_url, :price, :is_active)
 
+-- :name update-product! :! :n
+-- :doc update a product record
+UPDATE products SET name = :name, image_url = :image_url, price = :price, is_active = :is_active WHERE slug = :slug
+
 -- :name get-product :? :1
 -- :doc retrieve a product given the slug.
 SELECT * FROM products
