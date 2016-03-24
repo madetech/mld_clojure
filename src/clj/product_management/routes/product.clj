@@ -10,16 +10,16 @@
 
 (defn product-list-page []
   (layout/render
-    "product-list.html"
+    "product/list.html"
     (merge {:products (db/get-products)})))
 
 (defn product-create-page []
   (layout/render
-    "product-create.html"))
+    "product/create.html"))
 
 (defn product-show-page [slug]
   (layout/render
-    "product-show.html"
+    "product/show.html"
     (merge {:product (db/get-product {:slug slug})})))
 
 (defn validate-product [params]
