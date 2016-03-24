@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Add a product</h1>
+
+<div class="row">
+    <div class="span12">
+        <form method="POST" action="/">
+                {% csrf-field %}
+                <p>
+                    Name:
+                    <input class="form-control"
+                           type="text"
+                           name="name"
+                           value="{{name}}" />
+                </p>
+                <p>
+                <p>
+                    Product Image:
+                    <input class="form-control"
+                           type="text"
+                           name="url"
+                           value="{{url}}" />
+                </p>
+                <p>
+                    Price:
+                    <input class="form-control"
+                           type="text"
+                           name="price"
+                           value="{{price}}" />
+                </p>
+                <p>
+                    Is Active?:
+                    <input class="form-control"
+                           type="checkbox"
+                           name="name"
+                           value="{{name}}" />
+                </p>
+                </p>
+                {% if errors.message %}
+                <div class="alert alert-danger">{{errors.message|join}}</div>
+                {% endif %}
+                <input type="submit" class="btn btn-primary" value="product-create" />
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -13,8 +13,13 @@
     "product-list.html"
     (merge {:products (db/get-products)})))
 
+(defn product-create-page []
+  (layout/render
+    "product-create.html"))
+
 (defroutes product-routes
-  (GET "/" [] (product-list-page)))
+  (GET "/" [] (product-list-page))
+  (GET "/create" [] (product-create-page)))
 
 (defn validate-product [params]
   (first
