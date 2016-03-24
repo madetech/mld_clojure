@@ -37,7 +37,7 @@
     (merge {:product (db/get-product-by-id {:id id})})))
 
 (defn product-delete [id]
-  (db/delete-product!
+  (db/delete-product! {:id id})
   (response/found "/"))
 
 ;
