@@ -58,4 +58,33 @@
       (System/exit 0))
     :else
     (start-app args)))
-  
+
+(ns product-management.test.db.core
+  (:require [product-management.db.core :refer [*db*] :as db]
+            [luminus-migrations.core :as migrations]
+            [clojure.test :refer :all]
+            [clojure.java.jdbc :as jdbc]
+            [product-management.config :refer [env]]
+            [conman.core :refer [with-transaction]]
+            [mount.core :as mount]))
+
+(use-fixtures
+  :once
+  (fn [f]
+    (mount/start
+      #'product-management.config/env
+      #'product-management.db.core/*db*)
+    (migrations/migrate ["migrate"](:database-url env))
+    (f)))
+
+(deftest test-message
+  (jdbc/with-db-transaction [t-conn *db*]
+    (jdbc/db-set-rollback-only! t-conn)
+    (let [message {:name "test"
+                   :slug "test"
+                   :is_active true}]
+      (is (= 1 (db/create-product! t-conn message)))
+      (let [result (db/get-products t-conn {})]
+        (is (= 1 (count result)))
+        (is (= message (dissoc (first result) :id))))))
+  (is (empty? (db/get-products))))
