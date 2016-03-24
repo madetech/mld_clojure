@@ -8,6 +8,10 @@
             [bouncer.validators :as v]
             [ring.util.response :refer [redirect]]))
 
+;
+; ACTIONS
+;
+
 (defn product-list-page []
   (layout/render
     "product/list.html"
@@ -31,6 +35,10 @@
   (layout/render
     "product/edit.html"
     (merge {:product (db/get-product-by-id {:id id})})))
+
+;
+; UTILITY
+;
 
 (defn validate-product [params]
   (first
@@ -58,6 +66,11 @@
       (db/update-product!
         (assoc params :is_active true :slug (params :slug)))
       (response/found "/"))))
+
+
+;
+; ROUTES
+;
 
 (defroutes product-routes
   (GET "/" [] (product-list-page))
