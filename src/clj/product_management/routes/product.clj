@@ -6,7 +6,26 @@
             [product-management.db.core :as db]
             [bouncer.core :as b :only [defvalidator]]
             [bouncer.validators :as v]
-            [ring.util.response :refer [redirect]]))
+            [ring.util.response :refer [redirect]]
+            [clojure.tools.logging :as log])
+  (:import [java.io File FileInputStream FileOutputStream]))
+
+(def resource-path "/var/www/mld_clojure/resources/public/uploads/")
+
+(defn file-path [path & [filename]]
+  (java.net.URLDecoder/decode
+    (str path File/separator filename)
+    "utf-8"))
+
+(defn upload-file
+  [path {:keys [tempfile size filename]}]
+  (try
+    (with-open [in (new FileInputStream tempfile)
+                out (new FileOutputStream (file-path path filename))]
+      (let [source (.getChannel in)
+            dest   (.getChannel out)]
+        (.transferFrom dest source 0 (.size source))
+        (.flush out)))))
 
 (defn product-list-page []
   (layout/render
@@ -35,10 +54,12 @@
 
 (defn create-slug-from-name [name]
   (clojure.string/lower-case (clojure.string/replace name #"\s+" "-")))
-  
+
 (defn create-product! [{:keys [params]}]
+  (log/info params)
+
   (if-let [errors (validate-product params)]
-    (-> (response/found "/")
+    (-> (response/found "/dasdas")
         (assoc :flash (assoc params :errors errors)))
     (do
       (db/create-product!
@@ -48,6 +69,6 @@
 (defroutes product-routes
   (GET "/" [] (product-list-page))
   (GET "/product/create" [] (product-create-page))
-  (POST "/product/create" request (create-product! request))
+  (POST "/product/create" [params image] (create-product! params))
   (GET "/product/edit/:slug" [slug] (product-edit-page slug))
   (GET "/product/:slug" [slug] (product-show-page slug)))

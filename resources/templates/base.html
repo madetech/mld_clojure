@@ -40,6 +40,10 @@
       </nav>
 
     <div class="container">
+      {% if errors.message %}
+        <div class="alert alert-danger">{{errors.message|join}}</div>
+      {% endif %}
+
       {% block content %}
       {% endblock %}
     </div>

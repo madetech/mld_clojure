@@ -2,8 +2,7 @@
 {% block content %}
   <h1>Check out these products</h1>
 
-  <ul>
-  <table>  
+  <table>
     <tr>
       <th>Product</th>
       <th>Price</th>
@@ -11,8 +10,8 @@
     {% for product in products %}
     <tr>
       <td><a href="{{servlet-context}}/product/{{product.slug}}">{{product.name}}</a></td>
-      <td>£ {{product.price}}</td>   
+      <td>£ {{product.price}}</td>
     </tr>
     {% endfor %}
-  </ul>
+  </table>
 {% endblock %}

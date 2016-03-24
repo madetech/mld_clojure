@@ -4,37 +4,34 @@
 
 <div class="row">
     <div class="span12">
-        <form method="POST" action="/product/create">
-                {% csrf-field %}
-                <p>
-                    Name:
-                    <input class="form-control"
-                           type="text"
-                           name="name"
-                           value="{{name}}" />
-                </p>
-                <p>
-                    Image Url:
-                    <input class="form-control"
-                           type="text"
-                           name="image_url"
-                           value="{{image_url}}" />
-                </p>
-                <p>
-                <p>
-                    Price:
-                    <input class="form-control"
-                           type="text"
-                           name="price"
-                           value="{{price}}" />
-                </p>
-                </p>
-                {% if errors.message %}
-                <div class="alert alert-danger">{{errors.message|join}}</div>
-                {% endif %}
-                <button type="submit" class="btn btn-primary" value="product-create">
-                  Create Product
-                </button>
+        <form method="POST" action="/product/create" enctype="multipart/form-data">
+            {% csrf-field %}
+            <p>
+                Name:
+                <input class="form-control"
+                       type="text"
+                       name="name"
+                       value="{{name}}" />
+            </p>
+            <p>
+                Image:
+                <input class="form-control"
+                       type="file"
+                       name="image" />
+            </p>
+            <p>
+                Price:
+                <input class="form-control"
+                       type="text"
+                       name="price"
+                       value="{{price}}" />
+            </p>
+            {% if errors.message %}
+            <div class="alert alert-danger">{{errors.message|join}}</div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary" value="product-create">
+              Create Product
+            </button>
         </form>
     </div>
 </div>
