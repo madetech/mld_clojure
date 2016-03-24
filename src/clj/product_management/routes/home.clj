@@ -16,7 +16,7 @@
 (defroutes home-routes
   (GET "/" [] (product-list-page)))
 
- (defn validate-message [params]
+(defn validate-message [params]
   (first
     (b/validate
       params
