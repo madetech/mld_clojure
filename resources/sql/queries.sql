@@ -21,8 +21,8 @@ DELETE FROM users
 WHERE id = :id
 
 -- :name get-products :? :*
--- :doc retrieves the product records
-SELECT * FROM products
+-- :doc retrieves the active product records
+SELECT * FROM products WHERE is_active = TRUE
 
 -- :name create-product! :! :n
 -- :doc creates a new product record
