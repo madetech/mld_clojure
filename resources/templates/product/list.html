@@ -3,8 +3,16 @@
   <h1>Check out these products</h1>
 
   <ul>
+  <table>  
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+    </tr>
     {% for product in products %}
-      <li><a href="{{servlet-context}}/product/{{product.slug}}">{{product.name}}</a></li>
+    <tr>
+      <td><a href="{{servlet-context}}/product/{{product.slug}}">{{product.name}}</a></td>
+      <td>£ {{product.price}}</td>   
+    </tr>
     {% endfor %}
   </ul>
 {% endblock %}
