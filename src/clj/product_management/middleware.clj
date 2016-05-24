@@ -10,6 +10,7 @@
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
             [ring.middleware.format :refer [wrap-restful-format]]
             [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
+            [ring.middleware.logger :as logger]
             [buddy.auth.backends.session :refer [session-backend]]
             [buddy.auth.accessrules :refer [restrict]]
             [buddy.auth :refer [authenticated?]]
@@ -83,6 +84,7 @@
   (-> ((:middleware defaults) handler)
       wrap-auth
       wrap-formats
+      logger/wrap-with-logger
       wrap-webjars
       wrap-flash
       (wrap-session {:cookie-attrs {:http-only true}})
